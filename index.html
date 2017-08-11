@@ -47,8 +47,16 @@
     init()
     // 初始化方法
     function init(){
+         // 事件处理
+        var eventType;
+        var isHaveTouch = "ontouchend" in document ? true : false;
+        if(isHaveTouch){
+            eventType = 'touchstart';
+        }else{
+            eventType = 'click';
+        }
         var maxNum = 10;//设置点赞次数
-        $(".saying_zan").click(function(){
+        $(document).delegate(".saying_zan",eventType,function(){
             var limit = $(this).attr('data-limit');
             var htmlNumber = parseInt($(this).next().html());
             limit > maxNum ? maxNum : limit++;
